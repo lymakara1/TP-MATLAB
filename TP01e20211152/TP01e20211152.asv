@@ -1,0 +1,140 @@
+%1. Scalar variable
+
+a = 10;
+disp(a);
+
+b = 2.5*10^23;
+disp(b);
+
+c = 2+ 3i;
+disp(c);
+
+d = exp(2*pi/3);
+disp(d);
+
+%2. Vecotr variable
+
+aVec = [3.14, 19, 9, 26] %Horizontal matrix
+
+bVec = [2.71; 8; 18; 182] %Verticle matrix
+
+%c. 𝑐𝑉𝑒𝑐 = [5 4.8 … − 4.8 − 5] (numbers between 5 to -5 by decreasing 0.2)
+cVec = 5:-0.2:-5;
+disp(cVec);
+
+%d. 𝑑𝑉𝑒𝑐 = [100 100.01 … 100.99 101] (ue logspace)
+dVec = logspace(0, 1, 101);
+disp(dVec);
+
+%3. Matic variables
+%a. Display a matric 9x9 for all 3, use ones or zeros
+aMat = 3 * ones(9);
+disp(aMat);
+
+%b. Display a matric 9x9 for all 0 but with these values [1 2 3 4 5 4 3 2 1] in diagonal, use zeros, diag)
+bMat = diag([1, 2, 3, 4 ,5, 4, 3, 2, 1]);
+disp(bMat);
+
+%c. Display a matric 1 to 100
+% Define the number of row and column
+rows = 10;
+columns = 10;
+
+[row_indices, column_indices] = meshgrid(1:rows, 1:columns);
+cMat = column_indices + (row_indices -1) * columns;
+disp(cMat);
+
+%d. Display a matric 3x4, use NaN
+dMat = NaN(3, 4);
+disp(dMat);
+
+%e. eMat
+eMat = [13, -1, 5; -22, 10, -87];
+disp(eMat);
+
+%f. Initialize 𝑓𝑀𝑎𝑡, a matric 6x4 integers with random values between -5 and 5 (use rand and floor or ceil)
+fMat = randi([-5, 5], 6, 4); % rows = 6, columns = 4
+disp(fMat);
+
+
+%4. Scalar questions: By using the variables created in exercise 1, calculate 𝑥, 𝑦, et 𝑧 :
+x = 1 / (1+exp(-(a-15)/16));
+disp(x);
+
+y = (sqrt(a)+nthroot(b, 21))^pi;
+disp(y);
+
+%c. 𝑧 = log (𝑅(𝑐) sin (a*pi/3) /𝑐𝑐̅where 𝑅 real part of complex number, 𝑐̅a conjugate of 𝑐 (use real, conj, log)
+z = log(real(c) * sin(a*pi/3)) * c * conj(c);
+disp(z);
+
+% 5. Vector question: By using the variables created in exercise 2
+% a. 
+xVec = exp((-cVec.^2)/(2 * (2.5)^2)) ./ sqrt(2*pi*(2.5)^2);
+disp(xVec);
+
+%b. (𝑎𝑉𝑒𝑐^T signify 𝑎𝑉𝑒𝑐 transpose)
+yVec = sqrt((aVec').^2 + bVec.^2);
+disp(yVec);
+
+%c. (use log10)
+zVec = log10(1 ./ dVec);
+disp(zVec);
+
+%6. Matric equation: By using the variables created in exercise 2&3, solve these equations
+%a. 
+xMat = (aVec * bVec) * (aMat)^2;
+disp(xMat);
+
+%b.
+yMat = bVec * aVec;
+disp(yMat);
+
+%c.
+%Consider only the first 8 rows and columns of aMat
+aMat_sub = aMat(1:8, 1:8);
+%Compute cMat
+det_cMat = det(cMat);
+%Compute aMat_sub * bMat'
+
+%Compute zMat
+zMat = det_cMat * (aMat_sub * aMat)';
+disp(zMat);
+
+% 7. Operation on vector and matric.
+% a. Create a horizontal vector 𝑐𝑆𝑢𝑚 which each element is the sum of all elements in each column of the matric 𝑐𝑀𝑎𝑡 (use sum)
+cSum = sum(cMat);
+disp(cSum);
+
+%b. Create a vertical vector 𝑐𝑀𝑒𝑎𝑛 which each element is the average of all elements in each row of the matric 𝑒𝑀𝑎𝑡 (use mean)
+cMean = mean(eMat, 2);
+disp(cMean);
+
+%c. Replace the first row of the matric 𝑒𝑀𝑎𝑡 with [1 1 1]
+eMat(1, :) = [1, 1, 1];
+disp(eMat);
+
+%d. Create 𝑐𝑆𝑢𝑏, sub-matric of 𝑐𝑀𝑎𝑡, which contains rows 2 to 8 and columns 3 to 9
+%Define row and column indices for the sub matrix
+rows = 2:8;
+columns = 3:9;
+%Extract the cub matrix
+cSub = cMat(rows, columns);
+disp(cSub);
+
+%e. Create a horizontal vector 𝑒𝑉𝑒𝑐 with 5 elements by using rand. Find all elements which are less than 0.5 and then change them to 0 (use find)
+%Create a horizontal vector with 5 elements using rand
+eVec = rand(1, 5);
+%Find element less than 0.5
+indices = find(eVec < 0.5);
+%Change element less than 0.5 to 0
+eVec(indices) = 0;
+disp(eVec);
+
+
+%f. Create a vector 𝑓𝑉𝑒𝑐 = [1 2 … 20] (integers from 1 to 20) and then return negative value for all even numbers to get 𝑓𝑉𝑒𝑐 = [1 − 2 3 − 4 … − 20]
+%Create a vector with integer from 1 to 20
+fVec = 1:20;
+%Change the sign of 7 numbers
+fVec(mod(fVec, 2) == 0) = -fVec(mod(fVec, 2) == 0);
+disp(fVec);
